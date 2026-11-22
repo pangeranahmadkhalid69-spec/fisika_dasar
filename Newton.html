@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hukum Newton I, II, dan III</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#1d2433;--muted:#5b6478;--accent:#2f5bea;--line:#dfe3ee;--ok:#e8f6ee;--warn:#fff4e0}
+@media(prefers-color-scheme:dark){:root{--bg:#10141f;--card:#1a2030;--text:#e8ecf5;--muted:#9aa4ba;--accent:#7b9cff;--line:#2d364b;--ok:#17301f;--warn:#33280f}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{padding:28px 16px 8px;text-align:center}
+header h1{margin:0;font-size:1.8rem}
+header p{margin:4px 0 0;color:var(--muted)}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:16px;position:sticky;top:0;background:var(--bg);z-index:5}
+nav button,.sub button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 16px;border-radius:999px;cursor:pointer;font-size:.95rem}
+nav button.on,.sub button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+main{max-width:860px;margin:0 auto;padding:0 16px 48px}
+section{display:none}
+section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+h2{margin:6px 0 10px}
+h3{margin:0 0 8px}
+.bunyi{border-left:4px solid var(--accent);padding:6px 14px;background:var(--bg);border-radius:0 8px 8px 0;margin:10px 0}
+.rumus{font-family:Cambria,'Times New Roman',serif;font-size:1.25rem;text-align:center;padding:10px;background:var(--bg);border-radius:8px;margin:10px 0;overflow-x:auto}
+.sub{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:2px}
+input,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font-size:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:10px 0}
+.go{background:var(--accent);color:#fff;border:0;padding:10px 20px;border-radius:8px;font-size:1rem;cursor:pointer;margin-top:6px}
+.out{margin-top:14px}
+.res{padding:10px 14px;border-radius:8px;background:var(--ok);margin:8px 0}
+.res.warn{background:var(--warn)}
+.res.err{background:#fde8e8;color:#7a1b1b}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.metric{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.metric b{display:block;font-size:1.3rem}
+.metric span{font-size:.8rem;color:var(--muted)}
+canvas{width:100%;height:240px;border:1px solid var(--line);border-radius:10px;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.hide{display:none}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:24px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🍎 Hukum Newton I, II, dan III</h1>
+  <p>Materi, kalkulator, dan sejarah</p>
+</header>
+<nav id="nav">
+  <button class="on" data-t="materi">1. Materi &amp; Rumus</button>
+  <button data-t="hitung">2. Perhitungan</button>
+  <button data-t="sejarah">3. Sejarah</button>
+</nav>
+<main>
+
+<!-- ================= MATERI ================= -->
+<section id="materi" class="on">
+  <h2>Materi &amp; Rumus</h2>
+  <p>Hukum Newton adalah tiga hukum dasar mekanika klasik yang menjelaskan hubungan antara gaya yang bekerja pada benda dan gerak benda tersebut.</p>
+
+  <div class="card">
+    <h3>Hukum Newton I (Kelembaman)</h3>
+    <div class="bunyi">Setiap benda tetap diam atau bergerak lurus beraturan jika resultan gaya yang bekerja pada benda sama dengan nol.</div>
+    <div class="rumus">$$\sum \vec{F} = 0 \;\Longrightarrow\; \vec{a} = 0 \;\Longrightarrow\; \vec{v} = \text{konstan}$$</div>
+    <ul>
+      <li>Sifat mempertahankan keadaan gerak disebut kelembaman (inersia); makin besar massa, makin besar kelembamannya.</li>
+      <li>Contoh: penumpang terdorong ke depan saat mobil mengerem mendadak; koin tetap di tempat saat kertas di bawahnya ditarik cepat.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Hukum Newton II (Percepatan)</h3>
+    <div class="bunyi">Percepatan benda berbanding lurus dengan resultan gaya, berbanding terbalik dengan massanya, dan searah dengan gaya tersebut.</div>
+    <div class="rumus">$$\sum \vec{F} = m\,\vec{a} \qquad \text{atau} \qquad \vec{a} = \frac{\sum \vec{F}}{m}$$</div>
+    <div class="rumus">$$\sum \vec{F} = \frac{d\vec{p}}{dt}, \qquad \vec{p} = m\vec{v}$$</div>
+    <table>
+      <tr><th>Besaran</th><th>Simbol</th><th>Satuan SI</th></tr>
+      <tr><td>Gaya</td><td>F</td><td>newton (N)</td></tr>
+      <tr><td>Massa</td><td>m</td><td>kilogram (kg)</td></tr>
+      <tr><td>Percepatan</td><td>a</td><td>m/s²</td></tr>
+    </table>
+    <p><b>Rumus terkait (GLBB):</b></p>
+    <div class="rumus">$$v = v_0 + a\,t \qquad s = v_0 t + \tfrac{1}{2} a t^2$$</div>
+    <p><b>Gaya yang sering dipakai:</b> gaya berat $w = m\,g$ ($g \approx 9{,}8\ \text{m/s}^2$); gaya gesek $f = \mu\,N$; gaya normal pada bidang miring $N = m\,g\cos\theta$.</p>
+  </div>
+
+  <div class="card">
+    <h3>Hukum Newton III (Aksi-Reaksi)</h3>
+    <div class="bunyi">Jika benda A memberi gaya (aksi) pada benda B, maka benda B memberi gaya (reaksi) pada benda A yang sama besar dan berlawanan arah.</div>
+    <div class="rumus">$$\vec{F}_{AB} = -\vec{F}_{BA}$$</div>
+    <ul>
+      <li>Besar sama, arah berlawanan, bekerja pada dua benda yang berbeda (sehingga tidak saling meniadakan).</li>
+      <li>Contoh: roket menyemburkan gas ke bawah dan didorong ke atas; perenang mendorong air ke belakang dan terdorong ke depan.</li>
+      <li>Konsekuensi: kekekalan momentum tanpa gaya luar.</li>
+    </ul>
+    <div class="rumus">$$m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'$$</div>
+  </div>
+
+  <div class="card">
+    <h3>Ringkasan</h3>
+    <table>
+      <tr><th>Hukum</th><th>Nama</th><th>Rumus</th></tr>
+      <tr><td>I</td><td>Kelembaman</td><td>$\sum F = 0$</td></tr>
+      <tr><td>II</td><td>Percepatan</td><td>$\sum F = m\,a$</td></tr>
+      <tr><td>III</td><td>Aksi-Reaksi</td><td>$F_{aksi} = -F_{reaksi}$</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= HITUNG ================= -->
+<section id="hitung">
+  <h2>Perhitungan</h2>
+  <div class="sub" id="sub">
+    <button class="on" data-h="h1">Hukum I</button>
+    <button data-h="h2">Hukum II</button>
+    <button data-h="h3">Hukum III</button>
+  </div>
+
+  <!-- Hukum I -->
+  <div class="card calc" id="h1">
+    <h3>Hukum I: Cek Keseimbangan Gaya</h3>
+    <p>Dua gaya segaris bekerja pada benda (satu ke kanan, satu ke kiri).</p>
+    <div class="grid">
+      <div><label>Gaya ke kanan (N)</label><input id="a_fk" type="number" value="10" min="0" step="any"></div>
+      <div><label>Gaya ke kiri (N)</label><input id="a_fl" type="number" value="10" min="0" step="any"></div>
+      <div><label>Massa (kg)</label><input id="a_m" type="number" value="5" min="0.01" step="any"></div>
+      <div><label>Kecepatan awal (m/s)</label><input id="a_v0" type="number" value="0" step="any"></div>
+      <div><label>Waktu (s)</label><input id="a_t" type="number" value="5" min="0" step="any"></div>
+    </div>
+    <button class="go" onclick="hitung1()">Hitung</button>
+    <div class="out" id="o1"></div>
+  </div>
+
+  <!-- Hukum II -->
+  <div class="card calc hide" id="h2">
+    <h3>Hukum II: $\sum F = m\,a$</h3>
+    <div class="grid">
+      <div><label>Yang dicari</label>
+        <select id="b_cari" onchange="ubahMode()">
+          <option value="a">Percepatan (a)</option>
+          <option value="F">Gaya (F)</option>
+          <option value="m">Massa (m)</option>
+        </select></div>
+      <div id="rF"><label>Gaya F (N)</label><input id="b_F" type="number" value="20" step="any"></div>
+      <div id="rM"><label>Massa m (kg)</label><input id="b_m" type="number" value="4" min="0.01" step="any"></div>
+      <div id="rA" class="hide"><label>Percepatan a (m/s²)</label><input id="b_a" type="number" value="5" step="any"></div>
+    </div>
+    <div class="grid">
+      <div><label><input type="checkbox" id="b_gs" style="width:auto"> Pakai gaya gesek (bidang datar)</label></div>
+      <div><label>Koefisien gesek μ</label><input id="b_mu" type="number" value="0.2" min="0" step="any"></div>
+      <div><label>Gravitasi g (m/s²)</label><input id="b_g" type="number" value="9.8" step="any"></div>
+    </div>
+    <p style="color:var(--muted);font-size:.85rem;margin:0">Gesek hanya dipakai saat mencari percepatan: resultan = F − μ·m·g.</p>
+    <div class="grid">
+      <div><label>Kecepatan awal (m/s)</label><input id="b_v0" type="number" value="0" step="any"></div>
+      <div><label>Lama waktu (s)</label><input id="b_t" type="number" value="10" min="0.1" step="any"></div>
+    </div>
+    <button class="go" onclick="hitung2()">Hitung</button>
+    <div class="out" id="o2"></div>
+    <canvas id="chart" class="hide" width="800" height="300"></canvas>
+  </div>
+
+  <!-- Hukum III -->
+  <div class="card calc hide" id="h3">
+    <h3>Hukum III: Aksi-Reaksi dua benda</h3>
+    <p>Benda 1 mendorong benda 2 dengan gaya F. Keduanya mula-mula diam di bidang licin.</p>
+    <div class="grid">
+      <div><label>Gaya aksi F (N)</label><input id="c_F" type="number" value="50" min="0" step="any"></div>
+      <div><label>Massa benda 1 (kg)</label><input id="c_m1" type="number" value="60" min="0.01" step="any"></div>
+      <div><label>Massa benda 2 (kg)</label><input id="c_m2" type="number" value="40" min="0.01" step="any"></div>
+      <div><label>Lama dorongan (s)</label><input id="c_t" type="number" value="1" min="0" step="any"></div>
+    </div>
+    <button class="go" onclick="hitung3()">Hitung</button>
+    <div class="out" id="o3"></div>
+  </div>
+</section>
+
+<!-- ================= SEJARAH ================= -->
+<section id="sejarah">
+  <h2>Sejarah Hukum Newton</h2>
+
+  <div class="card">
+    <h3>Sebelum Newton</h3>
+    <ul>
+      <li><b>Aristoteles (abad ke-4 SM)</b> berpendapat bahwa benda butuh gaya terus-menerus agar tetap bergerak. Pandangan ini bertahan sekitar dua ribu tahun.</li>
+      <li><b>Galileo Galilei (awal abad ke-17)</b> lewat percobaan bidang miring menunjukkan bahwa benda yang tidak dihambat gesekan akan terus bergerak, dasar gagasan kelembaman.</li>
+      <li><b>René Descartes</b> merumuskan prinsip kelembaman dengan lebih jelas: benda bergerak lurus dengan kecepatan tetap bila tidak ada pengaruh luar.</li>
+      <li><b>Huygens, Wallis, dan Wren</b> meneliti tumbukan dan kekekalan momentum sekitar 1668, latar belakang gagasan aksi-reaksi.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Isaac Newton (1643–1727)</h3>
+    <p>Newton lahir di Woolsthorpe, Inggris, dan belajar di Universitas Cambridge. Saat kampus ditutup akibat wabah sekitar 1665–1666, ia mengembangkan gagasan awal tentang gerak, gravitasi, dan kalkulus.</p>
+    <p>Pada 1684 Edmond Halley mendorongnya menuliskan hasil pemikirannya. Hasilnya adalah <i>Philosophiæ Naturalis Principia Mathematica</i>, terbit tahun <b>1687</b> dengan dukungan Royal Society dan pembiayaan dari Halley. Di buku inilah tiga hukum gerak dirumuskan bersama hukum gravitasi universal.</p>
+  </div>
+
+  <div class="card">
+    <h3>Perkembangan tiap hukum</h3>
+    <p><b>Hukum I.</b> Newton memasukkan prinsip kelembaman (dari Galileo dan Descartes) sebagai hukum pertama dan mematahkan anggapan Aristoteles bahwa keadaan alami benda adalah diam.</p>
+    <p><b>Hukum II.</b> Dalam <i>Principia</i>, Newton menyatakan bahwa perubahan gerak (momentum) sebanding dengan gaya. Bentuk persamaan F = m·a yang kita pakai sekarang dirumuskan kemudian oleh Leonhard Euler sekitar 1750.</p>
+    <p><b>Hukum III.</b> Newton menyatakan bahwa setiap aksi selalu mendapat reaksi yang sama besar dan berlawanan arah, dipakai untuk menjelaskan tumbukan dan interaksi benda, termasuk dalam penurunan gravitasi universal.</p>
+  </div>
+
+  <div class="card">
+    <h3>Linimasa</h3>
+    <table>
+      <tr><th>Tahun</th><th>Peristiwa</th></tr>
+      <tr><td>± 350 SM</td><td>Aristoteles: benda butuh gaya terus-menerus untuk bergerak</td></tr>
+      <tr><td>± 1630-an</td><td>Galileo mengembangkan gagasan kelembaman</td></tr>
+      <tr><td>± 1644</td><td>Descartes merumuskan prinsip kelembaman</td></tr>
+      <tr><td>1668</td><td>Huygens, Wallis, dan Wren meneliti hukum tumbukan di Royal Society</td></tr>
+      <tr><td>1687</td><td>Newton menerbitkan Principia berisi tiga hukum gerak</td></tr>
+      <tr><td>± 1750</td><td>Euler merumuskan bentuk F = m·a</td></tr>
+      <tr><td>1905–1915</td><td>Einstein: relativitas khusus dan umum; mekanika Newton tidak berlaku pada kecepatan mendekati cahaya</td></tr>
+      <tr><td>1920-an</td><td>Mekanika kuantum: mekanika Newton tidak berlaku pada skala atom</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Batas berlakunya</h3>
+    <p>Hukum Newton sangat akurat untuk benda berukuran sehari-hari dengan kecepatan jauh di bawah kecepatan cahaya. Untuk kecepatan mendekati cahaya dipakai relativitas, dan untuk skala atom dipakai mekanika kuantum.</p>
+  </div>
+</section>
+</main>
+<footer>Tugas Ilmu Komputer · Hukum Newton I–III</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const num = id => parseFloat($(id).value);
+const fmt = (x, d = 3) => (Math.abs(x) < 1e-9 ? 0 : x).toLocaleString('id-ID', {maximumFractionDigits: d});
+const tx = (x, d = 3) => fmt(x, d).replace(',', '{,}');   // koma desimal untuk LaTeX
+
+// Render LaTeX (KaTeX auto-render)
+const mat = el => {
+  if (window.renderMathInElement) renderMathInElement(el, {
+    delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+    throwOnError: false
+  });
+};
+window.addEventListener('load', () => {
+  mat(document.body);
+  // render ulang otomatis setiap hasil perhitungan diperbarui
+  ['o1', 'o2', 'o3'].forEach(id => {
+    const el = $(id), ob = new MutationObserver(() => { ob.disconnect(); mat(el); ob.observe(el, {childList: true}); });
+    ob.observe(el, {childList: true});
+  });
+});
+const met = (l, v) => `<div class="metric"><span>${l}</span><b>${v}</b></div>`;
+
+// Navigasi utama
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('main > section').forEach(s => s.classList.toggle('on', s.id === b.dataset.t));
+  window.scrollTo({top: 0});
+});
+// Sub-navigasi hukum
+document.querySelectorAll('#sub button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#sub button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.calc').forEach(c => c.classList.toggle('hide', c.id !== b.dataset.h));
+});
+
+function hitung1() {
+  const fk = num('a_fk'), fl = num('a_fl'), m = num('a_m'), v0 = num('a_v0'), t = num('a_t');
+  if ([fk, fl, m, v0, t].some(isNaN) || m <= 0) { $('o1').innerHTML = '<div class="res err">Isi semua kolom dengan benar (massa harus &gt; 0).</div>'; return; }
+  const R = fk - fl, a = R / m, v = v0 + a * t, s = v0 * t + 0.5 * a * t * t;
+  let status;
+  if (Math.abs(R) < 1e-9) {
+    status = v0 === 0
+      ? '<div class="res">ΣF = 0 dan benda mula-mula diam, sehingga benda <b>tetap diam</b>.</div>'
+      : `<div class="res">ΣF = 0 dan benda bergerak, sehingga benda <b>bergerak lurus beraturan</b> dengan kecepatan tetap ${fmt(v0)} m/s.</div>`;
+  } else {
+    status = `<div class="res warn">ΣF ≠ 0 sehingga Hukum I tidak berlaku. Benda <b>dipercepat</b> ke arah ${R > 0 ? 'kanan' : 'kiri'}.</div>`;
+  }
+  $('o1').innerHTML = status +
+    `<div>$$\\sum F = ${tx(fk)} - ${tx(fl)} = ${tx(R)}\\ \\text{N}$$ $$a = \\frac{\\sum F}{m} = \\frac{${tx(R)}}{${tx(m)}} = ${tx(a)}\\ \\text{m/s}^2$$</div>` +
+    `<div class="metrics">${met('Kecepatan setelah ' + fmt(t) + ' s', fmt(v, 2) + ' m/s')}${met('Perpindahan setelah ' + fmt(t) + ' s', fmt(s, 2) + ' m')}</div>`;
+}
+
+function ubahMode() {
+  const c = $('b_cari').value;
+  $('rF').classList.toggle('hide', c === 'F');
+  $('rM').classList.toggle('hide', c === 'm');
+  $('rA').classList.toggle('hide', c === 'a');
+}
+
+function hitung2() {
+  const c = $('b_cari').value, v0 = num('b_v0'), T = num('b_t');
+  const gs = $('b_gs').checked, mu = num('b_mu'), g = num('b_g');
+  let F = num('b_F'), m = num('b_m'), a = num('b_a'), html = '';
+  const err = t => { $('o2').innerHTML = `<div class="res err">${t}</div>`; $('chart').classList.add('hide'); };
+  if (isNaN(v0) || isNaN(T) || T <= 0) return err('Isi kecepatan awal dan lama waktu dengan benar.');
+
+  if (c === 'a') {
+    if (isNaN(F) || isNaN(m) || m <= 0) return err('Isi gaya dan massa dengan benar.');
+    const Fr = gs ? F - mu * m * g : F;
+    a = Fr / m;
+    if (gs) html += `<div>$$\\sum F = F - \\mu m g = ${tx(F)} - ${tx(mu)}\\cdot${tx(m)}\\cdot${tx(g)} = ${tx(Fr)}\\ \\text{N}$$</div>`;
+    html += `<div>$$a = \\frac{\\sum F}{m} = \\frac{${tx(Fr)}}{${tx(m)}} = ${tx(a)}\\ \\text{m/s}^2$$</div><div class="res">Percepatan = <b>${fmt(a)} m/s²</b></div>`;
+  } else if (c === 'F') {
+    if (isNaN(m) || isNaN(a) || m <= 0) return err('Isi massa dan percepatan dengan benar.');
+    F = m * a;
+    html += `<div>$$\\sum F = m\\,a = ${tx(m)} \\times ${tx(a)} = ${tx(F)}\\ \\text{N}$$</div><div class="res">Gaya resultan = <b>${fmt(F)} N</b></div>`;
+  } else {
+    if (isNaN(F) || isNaN(a)) return err('Isi gaya dan percepatan dengan benar.');
+    if (Math.abs(a) < 1e-9) return err('Percepatan tidak boleh nol untuk mencari massa.');
+    m = F / a;
+    if (m <= 0) return err('Massa harus positif. Pastikan F dan a searah (tandanya sama).');
+    html += `<div>$$m = \\frac{\\sum F}{a} = \\frac{${tx(F)}}{${tx(a)}} = ${tx(m)}\\ \\text{kg}$$</div><div class="res">Massa = <b>${fmt(m)} kg</b></div>`;
+  }
+  const v = v0 + a * T, s = v0 * T + 0.5 * a * T * T;
+  html += `<div class="metrics">${met('Kecepatan pada t = ' + fmt(T) + ' s', fmt(v, 2) + ' m/s')}${met('Perpindahan pada t = ' + fmt(T) + ' s', fmt(s, 2) + ' m')}</div>`;
+  $('o2').innerHTML = html;
+  gambar(a, v0, T);
+}
+
+function hitung3() {
+  const F = num('c_F'), m1 = num('c_m1'), m2 = num('c_m2'), t = num('c_t');
+  if ([F, m1, m2, t].some(isNaN) || m1 <= 0 || m2 <= 0) { $('o3').innerHTML = '<div class="res err">Isi semua kolom dengan benar (massa harus &gt; 0).</div>'; return; }
+  const a1 = F / m1, a2 = F / m2, v1 = -a1 * t, v2 = a2 * t, p = m1 * v1 + m2 * v2;
+  $('o3').innerHTML =
+    `<div>$$F_{12} = ${tx(F)}\\ \\text{N} \\;\\Rightarrow\\; F_{21} = -F_{12} = -${tx(F)}\\ \\text{N}$$</div>` +
+    `<div>$$a_1 = \\frac{F}{m_1} = ${tx(a1)}\\ \\text{m/s}^2\\ (\\text{berlawanan arah}), \\qquad a_2 = \\frac{F}{m_2} = ${tx(a2)}\\ \\text{m/s}^2$$</div>` +
+    `<div class="metrics">${met('Kecepatan benda 1', fmt(v1) + ' m/s')}${met('Kecepatan benda 2', fmt(v2) + ' m/s')}${met('Momentum total', fmt(p) + ' kg·m/s')}</div>` +
+    `<div class="res">Gaya pada kedua benda sama besar, tetapi percepatannya berbeda karena massanya berbeda. Momentum total tetap nol (kekal).</div>`;
+}
+
+// Grafik v-t dan s-t
+function gambar(a, v0, T) {
+  const cv = $('chart'); cv.classList.remove('hide');
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height, P = 40;
+  const css = getComputedStyle(document.documentElement);
+  ctx.clearRect(0, 0, W, H);
+  const N = 100, ts = [], vs = [], ss = [];
+  for (let i = 0; i <= N; i++) { const t = T * i / N; ts.push(t); vs.push(v0 + a * t); ss.push(v0 * t + 0.5 * a * t * t); }
+  const all = vs.concat(ss, [0]);
+  const lo = Math.min(...all), hi = Math.max(...all), span = (hi - lo) || 1;
+  const X = t => P + (W - 2 * P) * t / T, Y = y => H - P - (H - 2 * P) * (y - lo) / span;
+  ctx.strokeStyle = css.getPropertyValue('--line'); ctx.fillStyle = css.getPropertyValue('--muted'); ctx.font = '14px sans-serif';
+  ctx.beginPath(); ctx.moveTo(P, Y(0)); ctx.lineTo(W - P, Y(0)); ctx.moveTo(P, P / 2); ctx.lineTo(P, H - P); ctx.stroke();
+  ctx.fillText(fmt(hi, 1), 2, P / 2 + 10); ctx.fillText(fmt(lo, 1), 2, H - P);
+  ctx.fillText('0', P - 4, H - P + 16); ctx.fillText(fmt(T, 1) + ' s', W - P - 20, H - P + 16);
+  const line = (arr, col) => { ctx.strokeStyle = col; ctx.lineWidth = 2.5; ctx.beginPath(); arr.forEach((y, i) => i ? ctx.lineTo(X(ts[i]), Y(y)) : ctx.moveTo(X(ts[i]), Y(y))); ctx.stroke(); };
+  line(vs, '#2f5bea'); line(ss, '#e8730c');
+  ctx.fillStyle = '#2f5bea'; ctx.fillText('v (m/s)', W - 170, 22);
+  ctx.fillStyle = '#e8730c'; ctx.fillText('s (m)', W - 90, 22);
+}
+</script>
+</body>
+</html>
